@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+# Estética Principal - Aplicación Móvil
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Descripción del Proyecto
+La **Estética Principal** es una aplicación móvil desarrollada utilizando **React Native** que permite a los usuarios gestionar citas para servicios estéticos, realizar compras de productos de belleza, y acceder a su perfil personal. La aplicación está diseñada para brindar una experiencia de usuario optimizada para dispositivos móviles, garantizando una navegación intuitiva y fluida.
 
-## Get started
+## Objetivos del Proyecto
+-	**Agendar citas:** Los usuarios pueden revisar la disponibilidad y agendar citas para servicios en la estética.
+-	**Comprar productos de belleza:** Los usuarios pueden explorar un catálogo de productos y realizar compras directamente desde la aplicación.
+-	**Gestión de usuarios:** Incluye funcionalidades de registro, inicio de sesión, recuperación de contraseña y edición del perfil personal.
+-	**Optimización para móviles:** La aplicación está diseñada para funcionar de manera rápida y eficiente en dispositivos Android e iOS.
 
-1. Install dependencies
+## Metodología de Trabajo
+El desarrollo del proyecto sigue la metodología ágil **Scrum**. Se divide en sprints de dos semanas, lo que permite realizar entregas incrementales y recibir retroalimentación continua para asegurar la calidad del producto. Los sprints se organizan en torno a objetivos específicos, como la implementación de funcionalidades clave o la corrección de errores.
 
-   ```bash
-   npm install
-   ```
+## Herramienta de Control de Versiones
+La herramienta seleccionada para el control de versiones es **Git**, con un repositorio alojado en **GitHub**. Git permite a los desarrolladores trabajar en diferentes características de manera simultánea mediante el uso de ramas (branches). El flujo de trabajo se estructura siguiendo la estrategia **Git Flow**, que organiza las ramas de desarrollo para garantizar que el código de producción esté siempre estable.
 
-2. Start the app
+## Flujo de Trabajo en Git
+1.	**Rama** `main`: Contiene el código listo para producción.
+2.	**Rama** `develop`: Es donde se integran nuevas funcionalidades que aún están en desarrollo.
+3.	**Feature branches**: Cada nueva funcionalidad se desarrolla en una rama individual a partir de `develop`. Una vez completada, se fusiona de nuevo en `develop`.
+4.	**Hotfix branches**: Estas ramas se utilizan para corregir errores críticos directamente en `main` sin interrumpir el desarrollo en `develop`.
 
-   ```bash
-    npx expo start
-   ```
+## Estrategia de Versionamiento
+Para el versionamiento, se sigue la estrategia Git Flow, la cual proporciona un flujo claro para la creación, revisión y fusión de ramas. Esto asegura que el desarrollo sea modular y organizado.
+-	**Rama** `main`: Solo contiene el código listo para producción.
+-	**Rama** `develop`: Contiene el código que está siendo preparado para la siguiente versión.
+-	**Feature branches**: Se crean para cada nueva funcionalidad y se fusionan en `develop` una vez completadas.
+-	**Hotfix branches**: Se crean cuando es necesario corregir errores críticos en la versión de producción, permitiendo actualizaciones rápidas sin interferir con el desarrollo continuo.
 
-In the output, you'll find options to open the app in a
+## Estrategia de Despliegue
+La estrategia de despliegue seleccionada para la aplicación móvil es **Rolling (Progresivo)**. Esta estrategia permite implementar la aplicación de manera gradual, liberando la actualización a pequeños grupos de usuarios antes de que esté disponible para todos. Esto reduce el riesgo de errores generalizados en producción.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Entornos de Despliegue
+1.	**Desarrollo:** Utilizado por los desarrolladores para realizar pruebas internas.
+2.	**Staging:** Entorno donde se realizan pruebas más exhaustivas antes del despliegue en producción.
+3.	**Producción:** Versión final de la aplicación disponible para todos los usuarios.
+   
+## Proceso de CI/CD
+El proceso de CI/CD (Integración Continua/Despliegue Continuo) está automatizado mediante **GitHub Actions**. Cada vez que el código es fusionado en la rama `develop` o `main`, se activan las siguientes tareas:
+1.	**Ejecución de pruebas automáticas:** Se realizan pruebas unitarias y de integración.
+2.	**Despliegue en el entorno de staging:** Si las pruebas son exitosas, el código se despliega automáticamente en staging.
+3.	**Despliegue en producción:** Una vez que el equipo valida el funcionamiento en staging, se realiza el despliegue en producción.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Instrucciones para Clonar el Repositorio e Instalar Dependencias
+Sigue los pasos a continuación para clonar el proyecto y ejecutar la aplicación en tu entorno local.
 
-## Get a fresh project
-
-When you're ready, run:
+## Clonar el Repositorio
 
 ```bash
-npm run reset-project
+git clone https://github.com/arthurR3/app-estetica.git
+cd estetica-principal-movil
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Instalar Dependencias
+Ejecuta el siguiente comando para instalar todas las dependencias del proyecto:
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Ejecutar la Aplicación
+Para ejecutar la aplicación en un entorno de desarrollo:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+En iOS:
 
-## Join the community
+```bash
+npx react-native run-ios
+```
 
-Join our community of developers creating universal apps.
+En Android:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx react-native run-android
+```
+
