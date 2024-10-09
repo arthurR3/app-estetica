@@ -49,7 +49,7 @@ Sigue los pasos a continuación para clonar el proyecto y ejecutar la aplicació
 
 ```bash
 git clone https://github.com/arthurR3/app-estetica.git
-cd estetica-principal-movil
+cd app-estetica
 ```
 
 ## Instalar Dependencias
