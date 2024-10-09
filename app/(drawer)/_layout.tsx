@@ -1,13 +1,13 @@
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer'
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from '@react-navigation/drawer';
 import { Feather } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useUsuarioContext } from '@/components/context/userContext';
 import { Alert } from 'react-native';
 
-const CustomDrawerContent = (props:any) => {
+const CustomDrawerContent = (props:DrawerContentComponentProps) => {
     const { state, dispatch } = useUsuarioContext()
 
     const handleSubmit = () => {
