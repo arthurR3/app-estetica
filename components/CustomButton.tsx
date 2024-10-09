@@ -1,6 +1,6 @@
 import Icon from '@expo/vector-icons/MaterialCommunityIcons'
 import React from 'react'
-import { GestureResponderEvent, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { GestureResponderEvent, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 interface CustomButtonProps {
     title: string,
@@ -12,13 +12,13 @@ interface CustomButtonProps {
 
 const CustomButton: React.FC<CustomButtonProps> =({title, onPress, backgroundColor='#632e3d', imageSource, iconName}) =>{
     return (
-        <<TouchableOpacity> style={[style.button, {backgroundColor}]} onPress={onPress}>
+        <Pressable style={[style.button, {backgroundColor}]} onPress={onPress}>
             <View style={style.content}>
                 {imageSource && <Image source={imageSource} style={style.image}/>}
                 <Text style={style.text}>{title}</Text>
                 {iconName && <Icon name='calendar-week' size={36}style={{marginLeft:30}} color={'white'}/>}
             </View>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
