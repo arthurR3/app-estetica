@@ -2,7 +2,7 @@ import { Servicios } from "@/interfaces/services.interfaces";
 import axios from "axios";
 
 class ServiciosService {
-    private static baseUrl = 'https://7a05-189-240-192-130.ngrok-free.app/api/v1/services';
+    private static baseUrl = 'https://2d4d-201-97-90-89.ngrok-free.app/api/v1/services';
 
     public static async getServiciosCarousel(): Promise<Servicios[]> {
         try {

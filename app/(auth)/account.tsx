@@ -2,9 +2,10 @@ import CustomButton from '@/components/CustomButton';
 import InputLogin from '@/components/InputText';
 import useValidation from '@/hooks/validation/useValidation';
 import React, { useState } from 'react';
-import { SafeAreaView, Text, View, StyleSheet, Pressable, Alert, ScrollView, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, StyleSheet, Pressable, Alert, ScrollView, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
+import { router, useFocusEffect } from 'expo-router';
 
 export default function Account() {
   const [name, setName] = useState('');
@@ -20,6 +21,23 @@ export default function Account() {
   const [secureText, setSecureText] = useState(true);
   const { emailError, passwordError, nameError, phoneError, validationEmail, validationPassword, validationName, validationPhone } = useValidation()
   const [isloading, setIsLoading] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+
+      setName('');
+      setApMaterno('');
+      setApPaterno('');
+      setEmail('');
+      setPassword('');
+      setRepetPassword('');
+      setFechaNacimiento('');
+      setDate(new Date())
+      setShowPicker(false);
+      setTelefono('');
+      setSecureText(true);
+    }, [])
+  );
 
   const toogleDatepicker = () => {
     setShowPicker(!showPicker);
@@ -59,7 +77,7 @@ export default function Account() {
     if (!isEmailValid || !isPasswordValid || !isNameValid || !isLast_nameValid || !isLast2_nameValid || !isPhoneValid) {
       setIsLoading(false)
       Alert.alert('Error de Validación', 'Por favor, completa todos los campos correctamente.');
-      
+
       return;
     }
 
@@ -88,13 +106,15 @@ export default function Account() {
       }
     };
 
-    axios.post(`https://8f5a-201-97-40-206.ngrok-free.app/api/v1/users/`, userInfo)
+    axios.post(`https://2d4d-201-97-90-89.ngrok-free.app/api/v1/users/`, userInfo)
       .then(response => {
         if (response.data.success) {
           // Delay the success notification for better UX
           setTimeout(() => {
             setIsLoading(false)
-            Alert.alert('Registro exitoso', 'Tu cuenta ha sido creada');
+            Alert.alert('Registro exitoso', 'Tu cuenta ha sido creada', [
+              { text: 'OK', onPress: () => router.push('/login') }
+            ]);
           }, 3500);
         } else {
           const errorMessage = response.data.message ? response.data.message : 'Error desconocido';
@@ -119,17 +139,10 @@ export default function Account() {
       });
   };
 
-if(isloading){
-  return(
-    <SafeAreaView style={styles.loadingContainer}>
-    <ActivityIndicator size={'large'} color='white' />
-    <Text>Registrando...</Text>
-  </SafeAreaView>
-  )
-}
+
   return (
-    <ScrollView>
-      <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView >
         <Text style={styles.title}>Crear una cuenta</Text>
         <Text style={styles.subtitle}>¿Ya estás registrado? Inicia sesión aquí.</Text>
         <View style={styles.row}>
@@ -180,13 +193,15 @@ if(isloading){
         <View style={styles.row}>
           <View style={styles.inputWrapper}>
             <Text style={styles.inputText}>CORREO ELECTRONICO</Text>
-            <InputLogin placeholder='example@example.com' image='mail' value={email} onChangeText={setEmail}
+            <InputLogin placeholder='example@example.com' keyboardType='email-address'
+              image='mail' value={email} onChangeText={setEmail}
               bolError={!!emailError} strError={emailError}
             />
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.inputText}>No. CELULAR</Text>
-            <InputLogin placeholder='789 890 1015' image='phone-portrait' value={telefono} onChangeText={setTelefono}
+            <InputLogin placeholder='789 890 1015' image='phone-portrait'keyboardType='numeric' 
+              value={telefono} onChangeText={setTelefono}
               strError={phoneError} bolError={!!phoneError}
             />
           </View>
@@ -194,22 +209,26 @@ if(isloading){
         <View style={styles.row}>
           <View style={styles.inputWrapper}>
             <Text style={styles.inputText}>CONTRASEÑA</Text>
+            <InputLogin placeholder='*********' image='lock-closed' value={repetPassword} onChangeText={setRepetPassword}
+              strError={passwordError} bolError={!!passwordError} secureText={secureText}
+            />
+
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.inputText}>REPETIR CONTRASEÑA</Text>
             <InputLogin placeholder='********' image='lock-closed' value={password} onChangeText={setPassword}
               secureText={secureText} bolGone={true} onPressIcon={() => setSecureText(!secureText)}
               bolError={!!passwordError} strError={passwordError}
             />
           </View>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.inputText}>REPETIR CONTRASEÑA</Text>
-            <InputLogin placeholder='*********' image='lock-closed' value={repetPassword} onChangeText={setRepetPassword}
-              strError={passwordError} bolError={!!passwordError} secureText={secureText}
-            />
-          </View>
         </View>
-        <CustomButton title='Registrarme' onPress={handleSubmit} />
-      </SafeAreaView>
-      
-    </ScrollView>
+        {isloading ? (
+          <ActivityIndicator size="large" color="#452e3f" style={styles.loading} />
+        ) : (
+          <CustomButton title='Registrarme' onPress={handleSubmit} disabled={isloading} />
+        )}
+      </ScrollView>
+    </SafeAreaView>
 
   );
 }
@@ -218,7 +237,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignContent: 'center',
+    marginHorizontal: 20
   },
   title: {
     fontSize: 36,
@@ -263,5 +283,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0.5)', // Semi-transparente
     zIndex: 10, // Se asegura de estar sobre el formulario
-  }
+  },
+  loading: {
+    marginVertical: 20,
+  },
 });

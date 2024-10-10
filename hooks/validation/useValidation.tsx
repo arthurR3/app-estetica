@@ -29,7 +29,7 @@ const useValidation = () => {
 
   // Validación del nombre: solo letras
   const validationName = (name: string) => {
-    const regex = /^[a-zA-Z\s]+$/;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     if (!regex.test(name)) {
       setNameError('El nombre solo debe contener letras');
       return false;
