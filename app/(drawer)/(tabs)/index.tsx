@@ -49,7 +49,7 @@ export default function HomeScreen() {
         </View>
       </View>
       <View style={styles.containerButton}>
-        <CustomButton title='Agendar Cita' onPress={()=>{}} iconName="calendar-week" />
+        <CustomButton title='Agendar Cita' onPress={()=>{Alert.alert('Hoal')}} iconName="calendar-number-outline" disabled={false}/>
       </View>
       <View>
         <Text style={styles.itemCard}>Productos más vendidos</Text>
