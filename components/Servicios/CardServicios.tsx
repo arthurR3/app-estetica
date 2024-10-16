@@ -1,69 +1,44 @@
-import React from 'react'
-import { Image, Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Link } from 'expo-router';
+import React from 'react';
+import { View, Text, Image, Pressable, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
-interface CardComponentProps {
-  id: number,
-  title: string,
-  imageUrl: any,
-  price?: number,
-  descripcion? : string
-  onPress: () => void,
-
+interface CardServiciosProps {
+  id: number;
+  title: string;
+  imageUrl: string;
+  descripcion?: string;
+  price?: number;
+  // Customizable styles for each screen 
+  customStyles: {
+    containerStyle: StyleProp<ViewStyle>,
+    cardStyle: StyleProp<ViewStyle>,
+    imageStyle: StyleProp<ImageStyle>,
+    titleStyle: StyleProp<TextStyle>,
+    descripcionStyle?: StyleProp<TextStyle>,
+    priceStyle?: StyleProp<TextStyle>,
+    textContainer?: StyleProp<ViewStyle>,
+  }
 }
-
-const CardServicios: React.FC<CardComponentProps> = (props) => {
+const CardServicios: React.FC<CardServiciosProps> = (props) => {
   return (
-    <View style={styles.container} key={props.id}>
-      <TouchableOpacity style={styles.card} onPress={()=>props.onPress}>
-        <Image source={{uri: props.imageUrl}} style={styles.image} />
-        <Text style={styles.title}>{props.title}</Text>
-        {props.price && <Text style={styles.price}>Precio: ${props.price}</Text>}
-        {props.descripcion && <Text style={styles.price}>{props.descripcion}</Text>}
-      </TouchableOpacity>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'center',
-    height: 160,
-    width: 150,
-    marginBottom:15,
-    backgroundColor:'transparent'
-},
-  card: {
-    backgroundColor: '#fff',
-    margin:'auto',
-    borderRadius: 10,
-    alignItems: 'center',
-    padding: 10,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  image: {
-    width: '80%',
-    height: 100,
-    borderRadius: 10,
-    aspectRatio:1
-  },
-  title: {
-    marginTop: 5,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  price: {
-    fontSize: 14,
-    color: 'gray',
-    textAlign: 'center',
-  },
-});
+    <Link href={`/details/${props.id}`} asChild>
+      <Pressable style={({ pressed }) => [
+        pressed ? { backgroundColor: 'lightgray', opacity: 0.8 } : null,
+      ]}
+      >
+        <View style={props.customStyles.containerStyle} key={props.id}>
+          <View style={props.customStyles.cardStyle}>
+            <Image source={{ uri: props.imageUrl }} style={props.customStyles.imageStyle} />
+            <View style={props.customStyles.textContainer}>
+              <Text style={props.customStyles.titleStyle}>{props.title}</Text>
+              {props.price && <Text style={props.customStyles.priceStyle}>Precio: ${(props.price).toFixed(2)}</Text>}
+              {props.descripcion && <Text style={props.customStyles.descripcionStyle}>{props.descripcion}</Text>}
+            </View>
+          </View>
+        </View>
+      </Pressable>
+    </Link>
+  );
+};
 
 export default CardServicios;
-
-

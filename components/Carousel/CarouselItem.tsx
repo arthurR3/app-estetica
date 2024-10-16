@@ -1,10 +1,11 @@
 import { Productos } from '@/interfaces/products.interface'
 import React from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import CardProducts from '../Productos/CardProducts';
 import Carousel from 'react-native-reanimated-carousel';
 import { Servicios } from '@/interfaces/services.interfaces';
 import CardServicios from '../Servicios/CardServicios';
+import { router } from 'expo-router';
 
 interface CardCarouselItem {
   products: Productos[];
@@ -44,10 +45,9 @@ const CarouselItem: React.FC<CardCarouselItem> = ({ products, onClick }) => {
 
 export interface CardCarouselService {
   servicios: Servicios[],
-  onClick: (id: number) => void;
 }
 
-const CarouselServicesItem: React.FC<CardCarouselService> = ({ servicios, onClick }) => {
+const CarouselServicesItem: React.FC<CardCarouselService> = ({ servicios }) => {
 
   const baseOptions = {
     parallaxScrollingOffset: 220,
@@ -71,7 +71,12 @@ const CarouselServicesItem: React.FC<CardCarouselService> = ({ servicios, onClic
           id={item.id}
           title={item.name}
           imageUrl={item.image}
-          onPress={() => onClick(item.id)}
+          customStyles={{
+            containerStyle: styles.container,
+            cardStyle: styles.card,
+            imageStyle: styles.image,
+            titleStyle: styles.title,
+          }} 
         />
       )}
     />
@@ -81,24 +86,42 @@ const CarouselServicesItem: React.FC<CardCarouselService> = ({ servicios, onClic
 export  {CarouselItem, CarouselServicesItem}
 
 
-
-{/* <Carousel
-    ref={isCarousel}
-      data={products}
-      renderItem={({ item }) => (
-        <CardProducts
-        key={item.id}
-          id={item.id}
-          title={item.name}
-          imageUrl={item.image}
-          onPress={() => onClick(item.id)}
-        />
-      )}
-      
-      layout="tinder"
-      layoutCardOffset={9}
-      sliderWidth={screenWidth}
-      itemWidth={screenWidth/3}
-      inactiveSlideShift={0}
-      useScrollView={true}
-    /> */}
+const styles = StyleSheet.create({
+  container: {
+    alignSelf: 'center',
+    height: 160,
+    width: 150,
+    marginBottom:15,
+    backgroundColor:'transparent'
+},
+  card: {
+    backgroundColor: '#fff',
+    margin:'auto',
+    borderRadius: 10,
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  image: {
+    width: '80%',
+    height: 100,
+    borderRadius: 10,
+    aspectRatio:1
+  },
+  title: {
+    marginTop: 5,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  price: {
+    fontSize: 14,
+    color: 'gray',
+    textAlign: 'center',
+  },
+});

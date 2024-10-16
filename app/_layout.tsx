@@ -1,7 +1,7 @@
 import { DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import {Drawer} from 'expo-router/drawer'
 import * as SplashScreen from 'expo-splash-screen';
 import NavBar from './navbar/nav';
@@ -31,7 +31,8 @@ export default function RootLayout() {
     <ThemeProvider value={DarkTheme}>
       <UsuarioProvider>
       <Stack>
-        <Stack.Screen name='(drawer)' options={{header: ()=> <NavBar/>}}/>
+        <Stack.Screen name='(drawer)' options={{header: ()=> <NavBar showMenu={true}/>}}/>
+        <Stack.Screen name='details/[service_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
         <Stack.Screen name='(auth)' options={{headerShown:false}}/>
       </Stack>
       </UsuarioProvider>

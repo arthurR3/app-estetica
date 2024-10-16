@@ -2,7 +2,7 @@ import { Productos } from "@/interfaces/products.interface";
 import axios from "axios";
 
 class ProductService {
-    private static baseUrl = 'https://2d4d-201-97-90-89.ngrok-free.app/api/v1/products';
+    private static baseUrl = `https://ffa4-201-97-72-168.ngrok-free.app/api/v1/products`;
 
     public static async getProductsForCarousel(): Promise<Productos[]> {
         try {

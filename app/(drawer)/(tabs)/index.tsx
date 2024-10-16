@@ -62,7 +62,7 @@ export default function HomeScreen() {
       <View>
         <Text style={styles.itemCard}>Servicios Ofrecidos</Text>
         {products.length > 0 ? (
-          <CarouselServicesItem servicios={services} onClick={() => handleProductSelect} />
+          <CarouselServicesItem servicios={services}/>
         ) : (
           <Text>No hay servicios disponibles</Text>
         )}

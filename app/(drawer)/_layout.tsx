@@ -34,6 +34,7 @@ const CustomDrawerContent = (props:DrawerContentComponentProps) => {
                 label={'Servicios'}
                 labelStyle={{ fontSize: 22 }}
                 onPress={() => { router.push('/(drawer)/(tabs)/servicios') }}
+
             />
             <DrawerItem icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />
             )}
@@ -70,6 +71,6 @@ const CustomDrawerContent = (props:DrawerContentComponentProps) => {
 }
 export default function DrawerLayout() {
     return (
-        <Drawer drawerContent={(props) => <CustomDrawerContent {...props} />} screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: '#4f3047' } }} />
+        <Drawer  drawerContent={(props) => <CustomDrawerContent {...props} />} screenOptions={{ headerShown: false, drawerStyle: { backgroundColor: '#4f3047' } }} />
     );
 }

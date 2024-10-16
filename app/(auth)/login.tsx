@@ -7,7 +7,7 @@ import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Alert, ActivityIndicator } from 'react-native';
 
-const URLBASE = 'https://2d4d-201-97-90-89.ngrok-free.app/api/v1';
+const URLBASE = 'https://23c5-189-240-192-130.ngrok-free.app/api/v1';
 
 export default function LoginScreen() {
   const { state, dispatch } = useUsuarioContext();
