@@ -15,7 +15,7 @@ class ServiciosService {
         }
     }
 
-    public static async getAllProducts(): Promise<Servicios[]> {
+    public static async getAllServices(): Promise<Servicios[]> {
         try {
             const response = await axios.get(this.baseUrl);
             const data:Servicios[] = response.data
@@ -25,6 +25,17 @@ class ServiciosService {
             return [];
         }
     }
+
+    public static async getDetail(id:number): Promise<Servicios|null> {
+        try {
+            const response = await axios.get(`${this.baseUrl}/${id}`)
+            const data:Servicios = response.data;
+            return data;
+        } catch (error) {
+            console.log('Error getting for id products', error);
+            return null
+        }
+    }
 }
 
 export default ServiciosService;
