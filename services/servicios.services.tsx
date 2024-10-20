@@ -1,8 +1,8 @@
 import { Servicios } from "@/interfaces/services.interfaces";
 import axios from "axios";
 
-class ServiciosService {
-    private static baseUrl = `https://ffa4-201-97-72-168.ngrok-free.app/api/v1/services`;
+class ServiciosService { 
+    private static baseUrl = `https://66e6-189-240-192-130.ngrok-free.app/api/v1/services`;
 
     public static async getServiciosCarousel(): Promise<Servicios[]> {
         try {
@@ -25,7 +25,7 @@ class ServiciosService {
             return [];
         }
     }
-
+//Hola Gabo, usa
     public static async getDetail(id:number): Promise<Servicios|null> {
         try {
             const response = await axios.get(`${this.baseUrl}/${id}`)

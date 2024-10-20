@@ -32,10 +32,12 @@ export default function ServiciosScreen() {
       }} />;
 
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text style={styles.titleService}>Servicios de la estética:</Text>
       <View>
-        <FlatList data={servicios} renderItem={renderItem} keyExtractor={(item) => item.id.toString()} />
+        <FlatList data={servicios} renderItem={renderItem} keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
       </View>
     </SafeAreaView>
   )
