@@ -91,8 +91,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   detailContainer: {
-    backgroundColor: '#fff',
-    padding: 16,
+     padding: 16,
     borderRadius: 10,
     marginVertical: 16,
   },

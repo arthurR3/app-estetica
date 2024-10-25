@@ -1,9 +1,40 @@
-import { Servicios } from "@/interfaces/services.interfaces";
+import { TimeSlot } from "@/components/Servicios/Horario/format_utilsTime";
+import { Schedule, Servicios } from "@/interfaces/services.interfaces";
 import axios from "axios";
 
 class ServiciosService { 
-    private static baseUrl = `https://66e6-189-240-192-130.ngrok-free.app/api/v1/services`;
+    private static baseUrl = `https://50ee-201-97-124-109.ngrok-free.app/api/v1/services`;
+    private static basicUrl = 'https://50ee-201-97-124-109.ngrok-free.app/api/v1';
+    public static async getWorkedSchedule(){
+        try {
+            const response = await axios.get(`${this.basicUrl}/horarioGnral`)
+            return response.data;
+        } catch (error) {
+            console.log('Error getting schedule worked', error);
+        }
+    }
 
+    public static async getWorkedExceptions(): Promise<Schedule[]> {
+        try {
+            const response = await axios.get(`${this.basicUrl}/horarioEXP`);
+            const data:Schedule[] = response.data;
+            return data;
+        } catch (error) {
+            console.log('Error getting schedule horarioEXP', error);
+            return [];
+        }
+    }
+
+    public static async getBookedSlots(selectDate: Date){
+        try {
+            const response = await axios.post(`${this.basicUrl}/dates/counts/times`,{selectDate});
+            return response.data.slots;
+        } catch (error) {
+            console.log('Error getting times-date', error)
+            return [];
+        }
+    }
+ 
     public static async getServiciosCarousel(): Promise<Servicios[]> {
         try {
             const response = await axios.get(this.baseUrl);
