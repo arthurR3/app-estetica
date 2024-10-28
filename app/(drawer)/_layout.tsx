@@ -7,54 +7,75 @@ import { router } from 'expo-router';
 import { useUsuarioContext } from '@/components/context/userContext';
 import { Alert } from 'react-native';
 
-const CustomDrawerContent = (props:DrawerContentComponentProps) => {
+const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     const { state, dispatch } = useUsuarioContext()
 
     const handleSubmit = () => {
         try {
-           dispatch({type:'logout'})
-    
-          router.replace('/')
-          Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente');
+            dispatch({ type: 'logout' })
+
+            router.replace('/')
+            Alert.alert('Sesión cerrada', 'Has cerrado sesión correctamente');
         } catch (error) {
-          Alert.alert('Error', 'Hubo un error al intentar cerrar sesión');
+            Alert.alert('Error', 'Hubo un error al intentar cerrar sesión');
         }
-      }
-    
+    }
+
     return (
         <DrawerContentScrollView {...props}>
-            <DrawerItem icon={({ color, size }) => (<Feather name='shopping-bag' size={25} color={color} />
+            {state.token && (
+
+                <DrawerItem
+                    icon={({ color, size }) => (<Feather name='user' size={25} color={color} />)}
+                    label={'Mi Perfil'}
+                    labelStyle={{ fontSize: 22 }}
+                    onPress={() => { router.push('/') }}
+                />
+
             )}
+
+            <DrawerItem icon={({ color, size }) => (<Feather name='home' size={25} color={color} />)}
+                label={'Inicio'}
+                labelStyle={{ fontSize: 22 }}
+                onPress={() => { router.push('/') }}
+            />
+            <DrawerItem icon={({ color, size }) => (<Feather name='shopping-bag' size={25} color={color} />)}
                 label={'Productos'}
                 labelStyle={{ fontSize: 22 }}
-                onPress={() => { router.push('/(drawer)/(tabs)/productos') }}
+                onPress={() => { router.push('/productos') }}
             />
-            <DrawerItem icon={({ color, size }) => (<Feather name='scissors' size={25} color={color} />
-            )}
+            <DrawerItem icon={({ color, size }) => (<Feather name='scissors' size={25} color={color} />)}
                 label={'Servicios'}
                 labelStyle={{ fontSize: 22 }}
-                onPress={() => { router.push('/(drawer)/(tabs)/servicios') }}
+                onPress={() => { router.push('/servicios') }}
+
             />
-            <DrawerItem icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />
-            )}
-                label={'Agendar Citas'}
+            <DrawerItem icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />)}
+                label={'Agendar Cita'}
                 labelStyle={{ fontSize: 22 }}
-                onPress={() => { router.push('/(drawer)/(tabs)/citas') }}
+                onPress={() => { router.push('/citas') }}
             />
             {state.token ? (
                 <>
 
+
                     <DrawerItem
-                        icon={({ color, size }) => (<Feather name='user' size={25} color={color} />)}
-                        label={'Mi Perfil'}
+                        icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />)}
+                        label={'Mis Citas'}
                         labelStyle={{ fontSize: 22 }}
-                        onPress={() => { router.push('/(drawer)/') }} 
+                        onPress={() => { router.push('/') }}
+                    />
+                    <DrawerItem
+                        icon={({ color, size }) => (<Feather name='shopping-cart' size={25} color={color} />)}
+                        label={'Mi Carrito'}
+                        labelStyle={{ fontSize: 22 }}
+                        onPress={() => { router.push('/') }}
                     />
                     <DrawerItem
                         icon={({ color, size }) => (<Feather name='log-out' size={25} color={color} />)}
                         label={'Cerrar Sesión'}
                         labelStyle={{ fontSize: 22 }}
-                        onPress={handleSubmit} 
+                        onPress={handleSubmit}
                     />
                 </>
             ) : (
@@ -62,7 +83,7 @@ const CustomDrawerContent = (props:DrawerContentComponentProps) => {
                     icon={({ color, size }) => (<Feather name='log-in' size={25} color={color} />)}
                     label={'Iniciar Sesión'}
                     labelStyle={{ fontSize: 22 }}
-                    onPress={() => { router.navigate('/(auth)/login') }} 
+                    onPress={() => { router.navigate('/login') }}
                 />
             )}
         </DrawerContentScrollView>

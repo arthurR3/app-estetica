@@ -42,4 +42,4 @@ const CardServicios: React.FC<CardServiciosProps> = (props) => {
   );
 };
 
-export default CardServicios;
+export default CardServicios;

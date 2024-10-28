@@ -49,7 +49,7 @@ export default function HomeScreen() {
         </View>
       </View>
       <View style={styles.containerButton}>
-        <CustomButton title='Agendar Cita' onPress={()=>{Alert.alert('Hoal')}} iconName="calendar-number-outline" disabled={false}/>
+        <CustomButton title='Agendar Cita' onPress={() => router.push('/citas')} iconName="calendar-number-outline" disabled={false}/>
       </View>
       <View>
         <Text style={styles.itemCard}>Productos más vendidos</Text>
@@ -62,7 +62,7 @@ export default function HomeScreen() {
       <View>
         <Text style={styles.itemCard}>Servicios Ofrecidos</Text>
         {products.length > 0 ? (
-          <CarouselServicesItem servicios={services} onClick={() => handleProductSelect} />
+          <CarouselServicesItem servicios={services}/>
         ) : (
           <Text>No hay servicios disponibles</Text>
         )}

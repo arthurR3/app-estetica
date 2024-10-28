@@ -106,7 +106,7 @@ export default function Account() {
       }
     };
 
-    axios.post(`https://2d4d-201-97-90-89.ngrok-free.app/api/v1/users/`, userInfo)
+    axios.post(`https://dcd4-189-240-192-130.ngrok-free.app/api/v1/users/`, userInfo)
       .then(response => {
         if (response.data.success) {
           // Delay the success notification for better UX
@@ -206,22 +206,18 @@ export default function Account() {
             />
           </View>
         </View>
-        <View style={styles.row}>
-          <View style={styles.inputWrapper}>
+   
             <Text style={styles.inputText}>CONTRASEÑA</Text>
             <InputLogin placeholder='*********' image='lock-closed' value={repetPassword} onChangeText={setRepetPassword}
               strError={passwordError} bolError={!!passwordError} secureText={secureText}
             />
 
-          </View>
-          <View style={styles.inputWrapper}>
             <Text style={styles.inputText}>REPETIR CONTRASEÑA</Text>
             <InputLogin placeholder='********' image='lock-closed' value={password} onChangeText={setPassword}
               secureText={secureText} bolGone={true} onPressIcon={() => setSecureText(!secureText)}
               bolError={!!passwordError} strError={passwordError}
             />
-          </View>
-        </View>
+
         {isloading ? (
           <ActivityIndicator size="large" color="#452e3f" style={styles.loading} />
         ) : (

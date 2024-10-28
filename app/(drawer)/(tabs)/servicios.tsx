@@ -31,16 +31,23 @@ export default function ServiciosScreen() {
         textContainer: styles.textContainer
       }} />;
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Text style={styles.titleService}>Servicios de la estética:</Text>
-      <View>
-        <FlatList data={servicios} renderItem={renderItem} keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{ paddingBottom: 100 }}
-        />
-      </View>
-    </SafeAreaView>
-  )
+      return (
+        <SafeAreaView style={{ flex: 1 }}>
+          <Text style={styles.titleService}>Servicios de la estética:</Text>
+          <View>
+            {servicios.length > 0 ? (
+              <FlatList
+                data={servicios}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                contentContainerStyle={{ paddingBottom: 100 }}
+              />
+            ) : (
+              <Text>No hay servicios disponibles</Text> 
+            )}
+          </View>
+        </SafeAreaView>
+      );
 }
 
 const styles = StyleSheet.create({

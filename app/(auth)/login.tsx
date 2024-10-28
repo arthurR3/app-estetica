@@ -1,20 +1,21 @@
-import { useUsuarioContext, UsuarioContext } from '@/components/context/userContext';
-import CustomButton from '@/components/CustomButton';
-import InputLogin from '@/components/InputText';
-import useValidation from '@/hooks/validation/useValidation';
-import axios from 'axios';
+import { View, Text, StyleSheet, SafeAreaView, Alert, ActivityIndicator } from 'react-native';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Alert, ActivityIndicator } from 'react-native';
 
-const URLBASE = 'https://2d4d-201-97-90-89.ngrok-free.app/api/v1';
+import CustomButton from '@/components/CustomButton';
+import InputLogin from '@/components/InputText';
+import { useUsuarioContext } from '@/components/context/userContext';
+import useValidation from '@/hooks/validation/useValidation';
+import AuthService from '@/services/auth.services';
+
+
 
 export default function LoginScreen() {
   const { state, dispatch } = useUsuarioContext();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureText, setSecureText] = useState(true);
-  const [loading, setLoading] = useState(false); // Estado para manejar el loading
+  const [loading, setLoading] = useState(false); 
   const { emailError, passwordError, validationEmail, validationPassword } = useValidation();
 
   const handleSubmit = async () => {
@@ -22,33 +23,20 @@ export default function LoginScreen() {
     const isPasswordValid = validationPassword(password);
 
     if (isEmailValid && isPasswordValid) {
-      setLoading(true); // Iniciar el loading
+      setLoading(true);
 
-      try {
-        const response = await axios.post(`${URLBASE}/users/login`, {
-          email: email,
-          password: password,
-        });
+      const response = await AuthService.login(email, password);
 
-        if (response.data.success) {
-          dispatch({ type: 'login', payload: response.data.data });
-          router.replace('/(tabs)/');
-        }
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-          if (error.response) {
-            if (error.response.status === 401 || error.response.status === 403) {
-              Alert.alert('Incorrecto', 'Credenciales incorrectas');
-            } else {
-              Alert.alert('Error', 'Ocurrió un error inesperado.');
-            }
-          }
-        } else {
-          Alert.alert('Error', 'No se puede conectar al servidor.');
-        }
-      } finally {
-        setLoading(false); // Detener el loading
+      if (response.success) {
+        // Iniciar sesión y redirigir si tiene éxito
+        dispatch({ type: 'login', payload: response.data.data });
+        router.replace('/');
+      } else {
+        // Mostrar la alerta basada en el código de error
+        Alert.alert('Error Inesperado', response.message);
       }
+
+      setLoading(false);
     }
   };
 

@@ -1,15 +1,24 @@
-export interface Servicios{
+export interface Servicios {
     id: number;
-    name : string;
+    name: string;
     id_categoria: number;
-    description:string;
+    description: string;
     price: number;
-    duration: number
+    duration: string
     image: string;
-    status:boolean;
+    status: boolean;
     categoria: Categoria;
 }
 
-export interface Categoria{
+export interface Categoria {
     name: string;
+}
+
+export interface Schedule {
+    dia_semana: number;
+    intervalos: Intervalos[];
+}
+export interface Intervalos {
+    hora_desde: string;
+    hora_hasta: string;
 }

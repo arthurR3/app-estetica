@@ -22,7 +22,7 @@ export default function ForgettedScreen() {
         }
 
         setLoading(true); // Activar el loading
-        axios.post('https://eafe-201-97-72-168.ngrok-free.app/api/v1/users/recover-password', {
+        axios.post('https://dcd4-189-240-192-130.ngrok-free.app/api/v1/users/recover-password', {
             email: email
         })
         .then((response) => {
@@ -47,7 +47,7 @@ export default function ForgettedScreen() {
         }
 
         setLoading(true); // Activar el loading
-        axios.post('https://eafe-201-97-72-168.ngrok-free.app/api/v1/users/verification-password', {
+        axios.post(`https://dcd4-189-240-192-130.ngrok-free.app/api/v1/users/verification-password`, {
             email: email,
             resetCode: parseInt(code)
         })
@@ -75,7 +75,8 @@ export default function ForgettedScreen() {
         }
 
         setLoading(true); // Activar el loading
-        axios.post('https://eafe-201-97-72-168.ngrok-free.app/api/v1/users/change-password', {
+       
+        axios.post(`https://dcd4-189-240-192-130.ngrok-free.app/api/v1/users/change-password`, {
             email: email,
             newPassword: newPassword
         })

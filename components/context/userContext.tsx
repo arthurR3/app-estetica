@@ -43,10 +43,16 @@ export const UsuarioProvider: React.FC<UsuarioProviderProps> = ({ children }) =>
     const [state, dispatch] = useReducer(usuarioReducer, initialState)
     useEffect(() => {
         const loadToken = async () => {
-            const token = await SecureStore.getItemAsync('token')
-            if (token) {
-                dispatch({ type: 'login', payload: token })
+            if (typeof window !== 'undefined') {
+                // Estamos en la web
+                localStorage.getItem('token');
+            }else{
+                const token = await SecureStore.getItemAsync('token')
+                if (token) {
+                    dispatch({ type: 'login', payload: token })
+                }
             }
+            
         }
         loadToken()
     }, []);
