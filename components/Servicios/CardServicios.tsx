@@ -19,6 +19,7 @@ interface CardServiciosProps {
     textContainer?: StyleProp<ViewStyle>,
   }
 }
+
 const CardServicios: React.FC<CardServiciosProps> = (props) => {
   return (
     <Link href={`/details/${props.id}`} asChild>

@@ -56,7 +56,6 @@ class ServiciosService {
             return [];
         }
     }
-//Hola Gabo, usa
     public static async getDetail(id:number): Promise<Servicios|null> {
         try {
             const response = await axios.get(`${this.baseUrl}/${id}`)
