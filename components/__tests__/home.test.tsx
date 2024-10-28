@@ -11,10 +11,38 @@ jest.mock('expo-router', () => ({
   router: { push: jest.fn() }
 }));
 
+
 describe('HomeScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
+
+  // En el archivo de prueba home.test.tsx
+beforeAll(() => {
+  // Mockear localStorage
+  const localStorageMock = (() => {
+      let store: { [key: string]: string } = {};
+
+      return {
+          getItem(key: string) {
+              return store[key] || null;
+          },
+          setItem(key: string, value: string) {
+              store[key] = value.toString();
+          },
+          removeItem(key: string) {
+              delete store[key];
+          },
+          clear() {
+              store = {};
+          },
+      };
+  })();
+
+  // @ts-ignore
+  global.localStorage = localStorageMock;
+});
+
 
   it('renders the main elements correctly', () => {
     const { getByText } = render(
@@ -23,8 +51,8 @@ describe('HomeScreen', () => {
       </UsuarioProvider>
     );
 
-    expect(getByText('Tu Lugar de Cuidado Personal y Belleza, A un click de Distancia')).toBeTruthy();
-    expect(getByText('Agendar Cita')).toBeTruthy();
+    expect(getByText('Tu Lugar de Cuidado Personal y Belleza, A un click de Distancia'));
+    expect(getByText('Agendar Cita'));
   });
 
   /* it('calls handleProductSelect with correct id on product click', async () => {

@@ -81,7 +81,7 @@ export default function CitasScreen() {
     setSelectDate(date);
   };
 
-  if (state.token) {
+  if (!state.token) {
     return (
       <View>
         <Text>Debes iniciar sesion para poder agendar</Text>
