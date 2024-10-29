@@ -23,8 +23,7 @@ jobs:
       - name: Instalar dependencias
         run: |
           npm install
-          npm install --save-dev @types/react-native
-          npm install expo
+          npm install --save-dev @types/react-native expo
 
   run-expo-tests:
     needs: install-dependencies
