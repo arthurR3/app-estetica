@@ -12,21 +12,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+   steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.14.0'  # Utiliza una versión compatible con Expo
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        -
-
+          node-version: '18.14.0'
+      
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
         run: npm test
+    
