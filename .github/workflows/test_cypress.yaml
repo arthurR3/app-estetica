@@ -43,9 +43,9 @@ jobs:
 
       - name: Esperar a que Expo inicie
         run: |
-          timeout 30s bash -c "until curl -s http://localhost:8081; do sleep 1; done"
+          timeout 30s bash -c "until curl -s http://localhost:19006; do sleep 1; done"
 
       - name: Ejecutar pruebas de Cypress
         run: npx cypress run
         env:
-          CYPRESS_baseUrl: http://localhost:8081
+          CYPRESS_baseUrl: http://localhost:19006
