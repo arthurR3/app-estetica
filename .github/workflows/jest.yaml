@@ -9,54 +9,25 @@ on:
       - main
 
 jobs:
-  name: Install Dependencies
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.1
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18.14.0'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.14.0'
 
-
-jobs:
-  test-servicios-screen:
+      - name: Install dependencies
         run: npm install
+
       - name: Run ServiciosScreen Tests
         run: npm test -- --testPathPattern='servicios.test.tsx'
 
-  test-home-screen:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.1
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.14.0'
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Run HomeScreen Tests
         run: npm test -- --testPathPattern='home.test.tsx'
-
-  test-citas-screen:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.1
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.14.0'
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Run CitasScreen Tests
         run: npm test -- --testPathPattern='citas.test.tsx'
