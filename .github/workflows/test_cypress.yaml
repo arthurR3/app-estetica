@@ -13,21 +13,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    # Usar diferentes versiones de Node si es necesario
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
       # Paso 1: Clonar el repositorio
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
 
       # Paso 2: Configurar Node.js en la versión especificada
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '18.14.0'
 
       # Paso 3: Instalar dependencias del proyecto
       - name: Install dependencies
@@ -38,10 +36,8 @@ jobs:
       # Paso 4: Iniciar el servidor Expo o React Native Web
       - name: Start Expo (or React Native Web) server
         run: |
-          npx expo-cli start --web --non-interactive &
-        env:
-          EXPO_WEB: true
-
+          npm start web
+      
       # Paso 5: Esperar a que el servidor esté listo
       - name: Wait for server to be ready
         run: |
@@ -58,7 +54,7 @@ jobs:
       # Guarda los resultados de Cypress si hay fallas
       - name: Archive Cypress test results
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-results
           path: cypress/results
