@@ -1,6 +1,5 @@
-name: Run Cypress Tests
+name: Run Cypress Tests on Expo Web
 
-# Disparadores del flujo de trabajo
 on:
   push:
     branches:
@@ -10,16 +9,9 @@ on:
       - main
 
 jobs:
-  name: Dependencies
-  test:
+  cypress-tests:
     runs-on: ubuntu-latest
-
     steps:
-      # Paso 1: Clonar el repositorio
-      - name: Checkout
-        uses: actions/checkout@v4.2.1
-
-      # Paso 2: Configurar Node.js en la versión especificada
       - name: Checkout
         uses: actions/checkout@v4.2.1
 
@@ -28,10 +20,30 @@ jobs:
         with:
           node-version: '18.14.0'
 
-      # Paso 3: Instalar dependencias del proyecto
       - name: Install dependencies
         run: |
           npm install
-          npm install --save-dev cypress  # Instalar Cypress como devDependency
+          npm install --save-dev cypress
 
-     
+      - name: Start Expo in Web Mode
+        run: |
+          npx expo install expo-cli
+          npx expo start:web &
+        
+      - name: Wait for Expo to Start
+        run: |
+          timeout 30s bash -c "until curl -s http://localhost:8081; do sleep 1; done"
+
+      - name: Run Cypress Tests
+        run: npx cypress run
+        env:
+          CYPRESS_baseUrl: http://localhost:8081
+
+      - name: Upload Cypress Screenshots and Videos
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
