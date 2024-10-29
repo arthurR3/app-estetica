@@ -1,48 +1,34 @@
-name: Flujo de trabajo de pruebas de Expo con Cypress
+name: Cypress Tests
 
 on:
   push:
     branches:
       - main
   pull_request:
-    branches:
-      - main
 
 jobs:
-  install-dependencies:
+  cypress-e2e:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4.2.1
 
-      - name: Configurar Node.js
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '16'
 
-      - name: Instalar dependencias
-        run: |
-          npm install
-          npm install --save-dev @types/react-native expo
+      - name: Install dependencies
+        run: npm install
 
-  run-expo-tests:
-    needs: install-dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4.2.1
-
-      - name: Configurar Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.14.0'
-
-      - name: Iniciar Expo en modo Web
-        run: npx expo start --web --non-interactive &
+      - name: Start React Native app in web mode
+        run: npm run web &
         env:
-          EXPO_USE_WEB: true
+          CI: true
 
+      - name: Wait for the app to be ready
+        run: npx wait-on http://localhost:3000
 
-      - name: Ejecutar pruebas de Cypress
-        run: npx cypress run
-       
+      - name: Run Cypress tests in headless mode
+        run: npx cypress run --headless --browser chrome
