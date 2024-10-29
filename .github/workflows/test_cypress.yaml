@@ -1,4 +1,4 @@
-name: Run Cypress Tests on Expo Web
+name: Flujo de trabajo de pruebas de Expo con Cypress
 
 on:
   push:
@@ -9,41 +9,42 @@ on:
       - main
 
 jobs:
-  cypress-tests:
+  install-dependencies:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout del repositorio
         uses: actions/checkout@v4.2.1
 
-      - name: Set up Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+
+      - name: Instalar dependencias
+        run: |
+          npm install
+          npm install --save-dev @types/react-native
+
+  run-expo-tests:
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4.2.1
+
+      - name: Configurar Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18.14.0'
 
-      - name: Install dependencies
+      - name: Iniciar Expo en modo Web
         run: |
-          npm install
-          npm install --save-dev cypress
-
-      - name: Start Expo in Web Mode
-        run: |
-          npx expo install expo-cli
-          npm start
-        
-      - name: Wait for Expo to Start
+          npm start 
+      - name: Esperar a que Expo inicie
         run: |
           timeout 30s bash -c "until curl -s http://localhost:8081; do sleep 1; done"
 
-      - name: Run Cypress Tests
+      - name: Ejecutar pruebas de Cypress
         run: npx cypress run
         env:
           CYPRESS_baseUrl: http://localhost:8081
-
-      - name: Upload Cypress Screenshots and Videos
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-artifacts
-          path: |
-            cypress/screenshots
-            cypress/videos
