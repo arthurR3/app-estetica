@@ -28,7 +28,7 @@ jobs:
           CI: true
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:3000
+        run: npx wait-on http://localhost:8081
 
       - name: Run Cypress tests in headless mode
         run: npx cypress run --headless --browser chrome
