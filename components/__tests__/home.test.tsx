@@ -54,28 +54,4 @@ beforeAll(() => {
     expect(getByText('Tu Lugar de Cuidado Personal y Belleza, A un click de Distancia'));
     expect(getByText('Agendar Cita'));
   });
-
-  /* it('calls handleProductSelect with correct id on product click', async () => {
-    const handleProductSelect = jest.fn();
-    const product = { id: 1, name: 'Producto 1' };
-    const mockProducts = [product];
-  
-    ProductService.getProductsForCarousel = jest.fn().mockResolvedValue(mockProducts);
-  
-    const { findByText } = render(
-      <UsuarioProvider>
-        <HomeScreen />
-      </UsuarioProvider>
-    );
-  
-    // Espera a que se renderice el producto
-    const productElement = await findByText(product.name);
-  
-    // Simula el clic en el producto
-    fireEvent.press(productElement);
-  
-    // Verifica que se llame a handleProductSelect con el ID correcto
-    expect(handleProductSelect).toHaveBeenCalledWith(product.id);
-  }); */
-  
 });
