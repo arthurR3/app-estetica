@@ -42,11 +42,7 @@ jobs:
         env:
           EXPO_USE_WEB: true
 
-      - name: Esperar a que Expo inicie
-        run: |
-          while ! curl -s http://localhost:19006; do sleep 1; done
 
       - name: Ejecutar pruebas de Cypress
         run: npx cypress run
-        env:
-          CYPRESS_baseUrl: http://localhost:8081
+       
