@@ -36,7 +36,7 @@ jobs:
       # Paso 4: Iniciar el servidor Expo o React Native Web
       - name: Start Expo (or React Native Web) server
         run: |
-          npm start web
+          npm start
       
       # Paso 5: Esperar a que el servidor esté listo
       - name: Wait for server to be ready
