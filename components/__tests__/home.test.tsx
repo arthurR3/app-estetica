@@ -6,43 +6,45 @@ import ProductService from '@/services/productos.services';
 import { router } from 'expo-router';
 import { Alert } from 'react-native';
 
-
+// Mockear el router
 jest.mock('expo-router', () => ({
   router: { push: jest.fn() }
 }));
 
+// Mockear el servicio ProductService
+jest.mock('@/services/productos.services', () => ({
+  getProductsAll: jest.fn(),
+}));
 
 describe('HomeScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  // En el archivo de prueba home.test.tsx
-beforeAll(() => {
-  // Mockear localStorage
-  const localStorageMock = (() => {
+  // Mockear localStorage antes de todas las pruebas
+  beforeAll(() => {
+    const localStorageMock = (() => {
       let store: { [key: string]: string } = {};
 
       return {
-          getItem(key: string) {
-              return store[key] || null;
-          },
-          setItem(key: string, value: string) {
-              store[key] = value.toString();
-          },
-          removeItem(key: string) {
-              delete store[key];
-          },
-          clear() {
-              store = {};
-          },
+        getItem(key: string) {
+          return store[key] || null;
+        },
+        setItem(key: string, value: string) {
+          store[key] = value.toString();
+        },
+        removeItem(key: string) {
+          delete store[key];
+        },
+        clear() {
+          store = {};
+        },
       };
-  })();
+    })();
 
-  // @ts-ignore
-  global.localStorage = localStorageMock;
-});
-
+    // @ts-ignore
+    global.localStorage = localStorageMock;
+  });
 
   it('renders the main elements correctly', () => {
     const { getByText } = render(
