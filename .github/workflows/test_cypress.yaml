@@ -43,7 +43,6 @@ jobs:
           EXPO_USE_WEB: true
 
       - name: Esperar a que Expo inicie
-       - name: Esperar a que Expo inicie
         run: |
           while ! curl -s http://localhost:19006; do sleep 1; done
 
