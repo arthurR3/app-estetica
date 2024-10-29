@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Run ServiciosScreen Tests
-        run: npm test -- --testPathPattern='ServiciosScreen.test.tsx'
+        run: npm test -- --testPathPattern='servicios.test.tsx'
 
   test-home-screen:
     runs-on: ubuntu-latest
