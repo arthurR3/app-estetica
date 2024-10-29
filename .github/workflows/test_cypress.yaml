@@ -28,7 +28,7 @@ jobs:
       - name: Start Expo in Web Mode
         run: |
           npx expo install expo-cli
-          npx expo start:web &
+          npm start
         
       - name: Wait for Expo to Start
         run: |
