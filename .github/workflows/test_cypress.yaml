@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Start React Native 
-        run: npm start
+        run: npm run web
         env:
           CI: true
 
