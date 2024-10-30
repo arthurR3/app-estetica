@@ -28,7 +28,7 @@ jobs:
           CI: true
 
       - name: Wait for the app to be ready
-        run: npx wait-on "[http://localhost:8081, http://localhost:19006]"
+        run: npx wait-on http://localhost:8081 http://localhost:19006
 
       - name: e2e cypress
         run: npx cypress run
