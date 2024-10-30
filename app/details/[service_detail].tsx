@@ -11,12 +11,15 @@ export default function DetailsScreen() {
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    if (service_detail) {
+    const fetchData = async () => {
       setLoading(true)
-      ServiciosService.getDetail(Number(service_detail))
-        .then(setDetailService)
-        .finally(() => setTimeout(() => { setLoading(false) }, 1500))
+      if (service_detail) {
+        const response = await ServiciosService.getDetail(Number(service_detail))
+        setDetailService(response)
+        setLoading(false)
+      }
     }
+    fetchData()
   }, [service_detail])
 
   if (loading) {
@@ -52,7 +55,7 @@ export default function DetailsScreen() {
               <Text style={styles.detailText}>Velazquez Ibarra, Col. Centro, Huejutla de Reyes, Hidalgo</Text>
             </View>
             <View style={styles.containerButton}>
-              <CustomButton title="Agendar Cita" onPress={() => { router.push('/citas')}} disabled={false} />
+              <CustomButton title="Agendar Cita" onPress={() => { router.push('/citas') }} disabled={false} />
             </View>
           </>
         ) : (
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   detailContainer: {
-     padding: 16,
+    padding: 16,
     borderRadius: 10,
     marginVertical: 16,
   },
@@ -119,6 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
-    paddingBottom: 100 
+    paddingBottom: 100
   },
 })
