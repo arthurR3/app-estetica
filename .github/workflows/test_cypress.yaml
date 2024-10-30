@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Start React Native 
-        run: expo start --web --non-interactive &
+        run: npm run web --non-interactive &
         env:
           CI: true
 
