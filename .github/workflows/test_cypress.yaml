@@ -31,5 +31,4 @@ jobs:
         run: npx wait-on http://localhost:8081 
 
       - name: e2e cypress
-        run: npm run e2e
-        
+        run: npx cypress run
