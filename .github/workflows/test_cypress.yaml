@@ -27,6 +27,9 @@ jobs:
         env:
           CI: true
 
+      - name: Show Expo logs
+        run: tail -n 50 /home/runner/work/app-estetica/app-estetica/logs.txt
+
       - name: Wait for the app to be ready
         run: npx wait-on http://localhost:8081 
 
