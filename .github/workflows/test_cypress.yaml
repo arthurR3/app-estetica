@@ -28,7 +28,19 @@ jobs:
           CI: true
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:8081 
+        run: npx wait-on http://localhost:8081
+
+      - name: Wait for the application to start
+        run: |
+          echo "Waiting for the application to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:8081 > /dev/null; then
+              echo "Application is up!"
+              break
+            fi
+            echo "Waiting..."
+            sleep 1
+          done
 
       - name: e2e cypress
         run: npx cypress run
