@@ -32,3 +32,4 @@ jobs:
 
       - name: e2e cypress
         run: npm run e2e
+        
