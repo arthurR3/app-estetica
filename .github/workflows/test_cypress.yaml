@@ -23,12 +23,12 @@ jobs:
         run: npm install
 
       - name: Start React Native 
-        run: npm run web
+        run: expo start --web --non-interactive &
         env:
           CI: true
 
       - name: Wait for the app to be ready
-        run: npx wait-on http://localhost:8081
+        run: npx wait-on "[http://localhost:8081, http://localhost:19006]"
 
       - name: e2e cypress
         run: npx cypress run
