@@ -23,14 +23,12 @@ jobs:
         run: npm install
 
       - name: Start React Native 
-        with: 
-          run: npm run web --non-interactive &
-          wait-on: http://localhost:8081
+        run: npm start --non-interactive &
         env:
           CI: true
 
       - name: Wait for the app to be ready
-        wait-on: http://localhost:8081 
+        run: npx wait-on http://localhost:8081 
 
       - name: e2e cypress
-        run: npx cypress run
+        run: npm cypress run
