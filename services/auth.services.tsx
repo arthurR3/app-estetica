@@ -11,7 +11,7 @@ interface UserData {
   }
 
 class AuthService {
-  private static baseUrl = `https://b500-201-97-39-19.ngrok-free.app/api/v1/users`;
+  private static baseUrl = `https://b4cf-201-97-156-63.ngrok-free.app/api/v1/users`;
 
   public static async login(email: string, password: string): Promise<any> {
     try {

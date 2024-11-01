@@ -22,3 +22,11 @@ export interface Intervalos {
     hora_desde: string;
     hora_hasta: string;
 }
+export interface Exceptions{
+    id: number;
+    id_administrador: number;
+    dia_semana : number;
+    hora_desde: string;
+    hora_hasta: string;
+
+}

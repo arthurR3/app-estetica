@@ -81,9 +81,9 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             ) : (
                 <DrawerItem
                     icon={({ color, size }) => (<Feather name='log-in' size={25} color={color} />)}
-                    label={'Iniciar Sesión'}
+                    label={'Iniciar Ssión'}
                     labelStyle={{ fontSize: 22 }}
-                    onPress={() => { router.navigate('/login') }}
+                    onPress={() => { router.navigate('/(auth)/login') }}
                 />
             )}
         </DrawerContentScrollView>
