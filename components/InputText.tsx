@@ -51,7 +51,9 @@ const InputLogin: React.FC<InputLoginProps> = ({
                     </Pressable>
                 ) : (
                     imageRight && (
-                        <Ionicons size={24} name={imageRight} style={styles.btnImage} />
+                        <Pressable style={styles.btnVisibility} onPress={onPressIcon}>
+                            <Ionicons size={26} name={imageRight} style={styles.btnImage} />
+                        </Pressable>
                     )
                 )}
             </View>
@@ -99,5 +101,5 @@ const styles = StyleSheet.create({
     },
     childContainer: {
         flex: 1,
-      }
+    }
 })

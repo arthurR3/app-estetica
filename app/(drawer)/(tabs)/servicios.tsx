@@ -14,7 +14,7 @@ export default function ServiciosScreen() {
     }
     fetchData()
   }, []);
-  const renderItem = ({ item }: { item: any }) =>
+  const renderItem = ({ item }: { item: Servicios }) =>
     <CardServicios
       key={item.id}
       id={item.id}

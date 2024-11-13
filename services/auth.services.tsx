@@ -1,17 +1,8 @@
+import { UserData } from '@/interfaces/auth.interfaces';
 import axios from 'axios';
 
-interface UserData {
-    name: string;
-    last_name1: string; 
-    last_name2: string; 
-    email: string;
-    password: string;
-    phone: string;
-    birthday: string;
-  }
-
 class AuthService {
-  private static baseUrl = `https://b4cf-201-97-156-63.ngrok-free.app/api/v1/users`;
+  private static baseUrl = `https://001d-201-97-107-140.ngrok-free.app/api/v1/users`;
 
   public static async login(email: string, password: string): Promise<any> {
     try {

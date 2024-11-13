@@ -36,7 +36,12 @@ const CarouselItem: React.FC<CardCarouselItem> = ({ products, onClick }) => {
           id={item.id}
           title={item.name}
           imageUrl={item.image}
-          onPress={() => onClick(item.id)}
+          customStyles={{
+            containerStyle: styles.container,
+            cardStyle: styles.card,
+            imageStyle: styles.image,
+            titleStyle: styles.title,
+          }} 
         />
       )}
     />

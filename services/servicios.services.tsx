@@ -1,10 +1,9 @@
-import { TimeSlot } from "@/components/Servicios/Horario/format_utilsTime";
 import { Exceptions, Schedule, Servicios } from "@/interfaces/services.interfaces";
 import axios from "axios";
 
 class ServiciosService { 
-    private static baseUrl = `https://b4cf-201-97-156-63.ngrok-free.app/api/v1/services`;
-    private static basicUrl = 'https://b4cf-201-97-156-63.ngrok-free.app/api/v1';
+    private static baseUrl = `https://001d-201-97-107-140.ngrok-free.app/api/v1/services`;
+    private static basicUrl = 'https://001d-201-97-107-140.ngrok-free.app/api/v1';
     public static async getWorkedSchedule(){
         try {
             const response = await axios.get(`${this.basicUrl}/horarioGnral`)

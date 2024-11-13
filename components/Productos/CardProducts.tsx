@@ -1,6 +1,8 @@
+import { Ionicons } from '@expo/vector-icons'
+import { Icon } from '@react-native-material/core'
 import { Link } from 'expo-router'
 import React from 'react'
-import { Image, Text, View, TouchableOpacity, StyleSheet, Pressable } from 'react-native'
+import { Image, Text, View, Pressable, StyleProp, ViewStyle, ImageStyle, TextStyle, Alert } from 'react-native'
 
 interface CardComponentProps {
   id: number,
@@ -8,67 +10,42 @@ interface CardComponentProps {
   imageUrl: any,
   price?: number,
   descripcion?: string
-  onPress: () => void,
-
+  customStyles: {
+    containerStyle: StyleProp<ViewStyle>,
+    cardStyle: StyleProp<ViewStyle>,
+    imageStyle: StyleProp<ImageStyle>,
+    titleStyle: StyleProp<TextStyle>,
+    descripcionStyle?: StyleProp<TextStyle>,
+    priceStyle?: StyleProp<TextStyle>,
+    textContainer?: StyleProp<ViewStyle>,
+  }
 }
 
 const CardProducts: React.FC<CardComponentProps> = (props) => {
   return (
-    <Link href={'/productos'} asChild>
-      <Pressable>
-        <View style={styles.container} key={props.id}>
-          <View style={styles.card}>
-            <Image source={{ uri: props.imageUrl }} style={styles.image} />
-            <Text style={styles.title}>{props.title}</Text>
-            {props.price && <Text style={styles.price}>Precio: ${props.price}</Text>}
-            {props.descripcion && <Text style={styles.price}>{props.descripcion}</Text>}
+    <Link href={`/details/products/${props.id}`} asChild>
+      <View style={props.customStyles.containerStyle} key={props.id}>
+        <View style={props.customStyles.cardStyle}>
+          <Image source={{ uri: props.imageUrl }} style={props.customStyles.imageStyle} />
+          <View style={props.customStyles.textContainer}>
+            <Text style={props.customStyles.titleStyle}>{props.title}</Text>
+            {props.descripcion && <Text style={props.customStyles.descripcionStyle}>{props.descripcion}</Text>}
+            {props.price && (
+              <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Text style={props.customStyles.priceStyle}>
+                  ${(props.price).toFixed(2)}
+                </Text>
+                <Pressable style={[props.customStyles.priceStyle, {alignItems:'center'}]} onPress={() => {Alert.alert('Hola')}}>
+                  <Ionicons name='cart-outline' size={24} />
+                </Pressable>
+              </View>
+            )}
           </View>
         </View>
-      </Pressable>
+      </View>
     </Link>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignSelf: 'center',
-    height: 160,
-    width: 150,
-    marginBottom: 15,
-    backgroundColor: 'transparent',
-  },
-  card: {
-    backgroundColor: '#fff',
-    margin: 'auto',
-    borderRadius: 10,
-    alignItems: 'center',
-    padding: 10,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 3,
-  },
-  image: {
-    width: '80%',
-    height: 100,
-    borderRadius: 10,
-    aspectRatio: 1
-  },
-  title: {
-    marginTop: 5,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  price: {
-    fontSize: 14,
-    color: 'gray',
-    textAlign: 'center',
-  },
-});
-
 export default CardProducts;
 
 
