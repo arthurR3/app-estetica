@@ -24,6 +24,7 @@ interface CardComponentProps {
 const CardProducts: React.FC<CardComponentProps> = (props) => {
   return (
     <Link href={`/details/products/${props.id}`} asChild>
+      <Pressable>
       <View style={props.customStyles.containerStyle} key={props.id}>
         <View style={props.customStyles.cardStyle}>
           <Image source={{ uri: props.imageUrl }} style={props.customStyles.imageStyle} />
@@ -43,6 +44,7 @@ const CardProducts: React.FC<CardComponentProps> = (props) => {
           </View>
         </View>
       </View>
+      </Pressable>
     </Link>
   )
 }

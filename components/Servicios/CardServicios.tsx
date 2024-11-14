@@ -23,6 +23,7 @@ interface CardServiciosProps {
 const CardServicios: React.FC<CardServiciosProps> = (props) => {
   return (
     <Link href={`/details/services/${props.id}`} asChild>
+      <Pressable>
         <View style={props.customStyles.containerStyle} key={props.id}>
           <View style={props.customStyles.cardStyle}>
             <Image source={{ uri: props.imageUrl }} style={props.customStyles.imageStyle} />
@@ -33,6 +34,7 @@ const CardServicios: React.FC<CardServiciosProps> = (props) => {
             </View>
           </View>
         </View>
+        </Pressable>
     </Link>
   );
 };

@@ -17,7 +17,6 @@ export const fetcBookedSlots = async (selectedDate: string, setBookedSlots:any) 
   if(selectedDate){
     try {
       const isFormatDate = adjustDateForApi(selectedDate)
-      console.log(isFormatDate)
       const response = await ServiciosService.getBookedSlots(isFormatDate);
       const slots = response.map((slots:any )=> {
         const [start, end] = slots.Horario.split(' - ');
@@ -26,7 +25,6 @@ export const fetcBookedSlots = async (selectedDate: string, setBookedSlots:any) 
           end: end.trim(),
         }
       });
-      console.log(slots)
       setBookedSlots(slots);
     } catch (error) {
       console.log('Error al obtener horarios reservados', error);
