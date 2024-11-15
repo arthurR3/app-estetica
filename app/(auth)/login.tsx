@@ -76,7 +76,7 @@ export default function LoginScreen() {
 
         {/* Mostrar el indicador de carga si loading es verdadero */}
         {loading ? (
-          <ActivityIndicator size="large" color="#452e3f" style={styles.loading} />
+          <ActivityIndicator  color="#452e3f" style={styles.loading} />
         ) : (
           <CustomButton title='Iniciar Sesión' onPress={handleSubmit} disabled={loading} />
         )}

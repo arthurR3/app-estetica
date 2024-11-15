@@ -26,53 +26,59 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             {state.token && (
 
                 <DrawerItem
-                    icon={({ color, size }) => (<Feather name='user' size={25} color={color} />)}
+                    icon={({ color }) => (<Feather name='user' size={25} color={color} />)}
                     label={'Mi Perfil'}
                     labelStyle={{ fontSize: 22 }}
-                    onPress={() => { router.push('/') }}
+                    onPress={() => { router.push('/users/perfil') }}
                 />
 
             )}
 
-            <DrawerItem icon={({ color, size }) => (<Feather name='home' size={25} color={color} />)}
+            <DrawerItem icon={({ color }) => (<Feather name='home' size={25} color={color} />)}
                 label={'Inicio'}
                 labelStyle={{ fontSize: 22 }}
                 onPress={() => { router.push('/') }}
             />
-            <DrawerItem icon={({ color, size }) => (<Feather name='shopping-bag' size={25} color={color} />)}
+            <DrawerItem icon={({ color }) => (<Feather name='shopping-bag' size={25} color={color} />)}
                 label={'Productos'}
                 labelStyle={{ fontSize: 22 }}
                 onPress={() => { router.push('/productos') }}
             />
-            <DrawerItem icon={({ color, size }) => (<Feather name='scissors' size={25} color={color} />)}
+            <DrawerItem icon={({ color }) => (<Feather name='scissors' size={25} color={color} />)}
                 label={'Servicios'}
                 labelStyle={{ fontSize: 22 }}
                 onPress={() => { router.push('/servicios') }}
 
             />
-            <DrawerItem icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />)}
+            <DrawerItem icon={({ color }) => (<Feather name='calendar' size={25} color={color} />)}
                 label={'Agendar Cita'}
                 labelStyle={{ fontSize: 22 }}
                 onPress={() => { router.push('/citas') }}
             />
+            <DrawerItem
+                        icon={({ color }) => (<Feather name='shopping-cart' size={25} color={color} />)}
+                        label={'Mi Carrito'}
+                        labelStyle={{ fontSize: 22 }}
+                        onPress={() => { router.push('/users/carrito') }}
+                    />
             {state.token ? (
                 <>
 
 
                     <DrawerItem
-                        icon={({ color, size }) => (<Feather name='calendar' size={25} color={color} />)}
+                        icon={({ color }) => (<Feather name='calendar' size={25} color={color} />)}
                         label={'Mis Citas'}
                         labelStyle={{ fontSize: 22 }}
                         onPress={() => { router.push('/') }}
                     />
-                    <DrawerItem
+                    {/* <DrawerItem
                         icon={({ color, size }) => (<Feather name='shopping-cart' size={25} color={color} />)}
                         label={'Mi Carrito'}
                         labelStyle={{ fontSize: 22 }}
-                        onPress={() => { router.push('/') }}
-                    />
+                        onPress={() => { router.push('/users/carrito') }}
+                    /> */}
                     <DrawerItem
-                        icon={({ color, size }) => (<Feather name='log-out' size={25} color={color} />)}
+                        icon={({ color }) => (<Feather name='log-out' size={25} color={color} />)}
                         label={'Cerrar Sesión'}
                         labelStyle={{ fontSize: 22 }}
                         onPress={handleSubmit}
@@ -80,7 +86,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                 </>
             ) : (
                 <DrawerItem
-                    icon={({ color, size }) => (<Feather name='log-in' size={25} color={color} />)}
+                    icon={({ color }) => (<Feather name='log-in' size={25} color={color} />)}
                     label={'Iniciar Ssión'}
                     labelStyle={{ fontSize: 22 }}
                     onPress={() => { router.navigate('/(auth)/login') }}
