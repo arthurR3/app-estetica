@@ -99,3 +99,33 @@ jobs:
 
       - name: Run CitasScreen Tests
         run: npm test -- --testPathPattern='citas.test.tsx'
+  deploy-expo:
+    runs-on: ubuntu-latest
+    needs: [test-servicios, test-home, test-citas]
+    if: github.ref == 'refs/heads/main'  # Solo ejecuta en la rama main
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.14.0'
+
+      - name: Install Expo CLI
+        run: npm install -g eas-cli
+
+      - name: Login to Expo
+        run: eas login --token ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build for Android
+        run: eas build --platform android --non-interactive
+
+      #- name: Build for iOS
+      #  run: eas build --platform ios --non-interactive
+
+      #- name: Upload to Stores (Optional)
+      #  if: always() # Deshabilitar si no necesitas publicar directamente en las tiendas
+      #  run: |
+      #    eas submit --platform android --non-interactive --latest
+      #    eas submit --platform ios --non-interactive --latest
