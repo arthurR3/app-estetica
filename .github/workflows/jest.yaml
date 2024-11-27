@@ -124,20 +124,9 @@ jobs:
 
       - name: 🚀 Build app
         run:  eas build --platform android --non-interactive --profile production
-
-      - name: Download .aab from Expo
-        run: |
-          curl -L https://expo.dev/artifacts/eas/eERnuT8Nks8mRsDeYX8uu4.aab -o app-release.aab
-          # Verificar si la descarga fue exitosa
-          ls -l app-release.aab
-
-      - name: Upload .aab artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.aab
-          path: app-release.aab
-        #- name: Install Expo CLI
-        # run: npm install -g eas-cli
+      
+      #- name: Install Expo CLI
+       # run: npm install -g eas-cli
 
       #- name: Build for Android
       #  run: eas build --platform --non-interactive --no-wait --profile production
