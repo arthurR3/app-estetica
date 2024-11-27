@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Jest Tests and Build APK
 
 on:
   push:
@@ -127,8 +127,3 @@ jobs:
       #- name: Build for iOS
       #  run: eas build --platform ios --non-interactive --profile preview --output ${{ github.workspace }}/app-release.ipa
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-release
-          path: ${{ github.workspace }}/app-release.apk
