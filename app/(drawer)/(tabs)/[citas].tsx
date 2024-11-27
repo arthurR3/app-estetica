@@ -31,13 +31,13 @@ export default function CitasScreen() {
   const [bookedSlots, setBookedSlots] = useState([]);
   const [workDay, setWorkDay] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
+  /* useEffect(() => {
     if (state.token) {
 
       const decoded = jwtDecode<DecodeToken>(state.token)
       setUserToken(decoded.user)
     }
-  }, [state.token])
+  }, [state.token]) */
 
   useEffect(() => {
     const fetchData = async () => {
