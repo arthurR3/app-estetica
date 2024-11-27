@@ -113,11 +113,22 @@ jobs:
         with:
           node-version: '18.14.0'
 
-      - name: Install Expo CLI
-        run: npm install -g eas-cli
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Build for Android
-        run: eas build --platform android --non-interactive --profile preview --output ${{ github.workspace }}/app-release.apk
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🚀 Build app
+        run:  eas build --platform Android --non-interactive --no-wait --profile production
+      #- name: Install Expo CLI
+       # run: npm install -g eas-cli
+
+      #- name: Build for Android
+      #  run: eas build --platform --non-interactive --no-wait --profile production
 
       #- name: Build for iOS
       #  run: eas build --platform ios --non-interactive --profile preview --output ${{ github.workspace }}/app-release.ipa
