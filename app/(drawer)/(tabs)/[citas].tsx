@@ -151,7 +151,7 @@ export default function CitasScreen() {
     <ScrollView>
       <SafeAreaView style={{ marginHorizontal: 18 }}>
         <Text style={styles.titleContainer}>Reserva una cita ahora mismo!</Text>
-
+        <Text>Selecciona un servicio</Text>
         <InputLogin placeholder='Selecciona un servicio' image='cut-outline'>
           <Picker selectedValue={selectedService}
             onValueChange={(value) => { setSelectedService(value), setServiceObject(services.find(service => service.id === Number(value))) }}
@@ -163,6 +163,7 @@ export default function CitasScreen() {
             ))}
           </Picker>
         </InputLogin>
+        <Text>Selecciona una hora</Text>
         <View>
           <CustomDatePicker onDateChange={handleDateChange} display='spinner' minimumDate={new Date(Date.now())} filterDate={isWorkDay} />
         </View>
