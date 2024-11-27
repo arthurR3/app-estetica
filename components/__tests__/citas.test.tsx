@@ -55,6 +55,6 @@ describe('CitasScreen', () => {
 
     render(<CitasScreen />);
 
-    expect(screen.getByText('Debes iniciar sesion para poder agendar'))
+    expect(screen.getByText('Ups! Parece que no has iniciado sesión'))
   });
 });

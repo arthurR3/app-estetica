@@ -1,8 +1,7 @@
 import { DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
-import { Link, Stack } from 'expo-router';
-import {Drawer} from 'expo-router/drawer'
+import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import NavBar from './navbar/nav';
 import 'react-native-reanimated';
@@ -30,13 +29,17 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DarkTheme}>
       <UsuarioProvider>
+       {/* <CartProvider> */}
       <Stack>
         <Stack.Screen name='(drawer)' options={{header: ()=> <NavBar showMenu={true}/>}}/>
+        <Stack.Screen name='users/perfil' options={{header: ()=> <NavBar showMenu={true}/>}}/>
+        <Stack.Screen name='users/carrito' options={{header: ()=> <NavBar showMenu={true}/>}}/>
         <Stack.Screen name='details/services/[service_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
         <Stack.Screen name='details/products/[products_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
 
         <Stack.Screen name='(auth)' options={{headerShown:false}}/>
       </Stack>
+      {/* </CartProvider> */}
       </UsuarioProvider>
     </ThemeProvider>
   );

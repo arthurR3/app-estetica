@@ -7,7 +7,7 @@ interface ApiResponse {
   }
 
 class DatesService {
-    private static baseUrl = 'https://001d-201-97-107-140.ngrok-free.app/api/v1/dates'
+    private static baseUrl = 'https://back-estetica-production-e475.up.railway.app/api/v1/dates'
 
     public static async sendDate(data:DataRequest): Promise<ApiResponse>{
         try {

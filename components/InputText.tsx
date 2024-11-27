@@ -66,14 +66,14 @@ export default InputLogin;
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20
+        marginBottom: 20,
     },
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
         padding: 7,
-        borderRadius: 10
+        borderRadius: 10,
     },
     leftIcon: {
         marginRight: 10,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingVertical: 10,
         paddingHorizontal: 18,
-
+        color: 'black',  // Añade color explícito para evitar el uso de "ViewStyle" o "undefined"
     },
     btnVisibility: {
         height: 40,
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
     childContainer: {
         flex: 1,
     }
-})
+});

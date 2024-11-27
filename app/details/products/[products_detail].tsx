@@ -1,3 +1,6 @@
+import { useCartContext } from '@/components/context/carritoContext'
+import CustomButton from '@/components/CustomButton'
+import InputLogin from '@/components/InputText'
 import { Productos } from '@/interfaces/products.interface'
 import ProductService from '@/services/productos.services'
 import { useLocalSearchParams } from 'expo-router'
@@ -8,7 +11,7 @@ export default function DetailsScreen() {
   const { products_detail } = useLocalSearchParams()
   const [detailProduct, setDetailProduct] = useState<Productos | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
-  const [cart, setCart] = useState<Productos[]>([]) // To store cart items
+  const { addToCart } = useCartContext()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,17 +25,11 @@ export default function DetailsScreen() {
     fetchData()
   }, [products_detail])
 
-  const addToCart = () => {
-    if (detailProduct) {
-      setCart((prevCart) => [...prevCart, detailProduct]) // Adds the selected product to the cart
-      alert('Producto agregado al carrito')
-    }
-  }
 
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator  color="#0000ff" />
         <Text>Cargando...</Text>
       </View>
     )
@@ -43,11 +40,25 @@ export default function DetailsScreen() {
       {detailProduct && (
         <View style={styles.productContainer}>
           <Image source={{ uri: detailProduct.image }} style={styles.image} />
+          <Text style={styles.price}>${(detailProduct.price).toFixed(2)}</Text>
           <Text style={styles.title}>{detailProduct.name}</Text>
           <Text style={styles.description}>{detailProduct.description}</Text>
-          <Text style={styles.price}>${detailProduct.price}</Text>
-          
-          <Button title="Agregar al carrito" onPress={addToCart} />
+          <Text style={{fontSize:24, fontWeight:'bold'}} >Stock Disponible</Text>
+          {detailProduct.amount > 0 ? (
+                        <Text style={{fontSize:24, fontWeight:'bold', marginBottom:10, color:'green'}}>{detailProduct.amount} unidades</Text>
+          ):(
+            <Text style={{fontSize:24, fontWeight:'bold', marginBottom:10, color:'red'}}>Sin unidades disponibles</Text>
+
+          )}
+          <View style={{marginTop:30}}>
+            <View>
+            {detailProduct.amount > 0 ? (
+            <CustomButton title='Agregar al Carrito' iconName='cart-sharp' onPress={()=>{}} disabled={false}/>
+          ):(
+            <CustomButton title='Agregar al Carrito' iconName='cart-sharp' onPress={()=>{}} disabled/>
+          )}
+            </View>
+          </View>
         </View>
       )}
     </ScrollView>
@@ -57,6 +68,7 @@ export default function DetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingBottom: 200
   },
   productContainer: {
     alignItems: 'center',
@@ -68,19 +80,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   description: {
-    fontSize: 16,
+    fontSize: 24,
     color: '#666',
     marginBottom: 10,
     textAlign: 'center',
   },
   price: {
-    fontSize: 18,
+    fontSize: 38,
     fontWeight: 'bold',
     marginBottom: 20,
+    justifyContent:'flex-end'
   },
 })

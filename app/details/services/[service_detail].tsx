@@ -25,7 +25,7 @@ export default function DetailsScreen() {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator  color="#0000ff" />
         <Text>Cargando...</Text>
       </View>
     )
@@ -34,7 +34,7 @@ export default function DetailsScreen() {
   return (
     <ScrollView style={styles.container}>
       <View>
-        {detailService ? (
+        {detailService ?(
           <>
             <View style={styles.containerImage}>
               <Image source={{ uri: detailService.image }} style={styles.image} />

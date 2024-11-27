@@ -114,7 +114,7 @@ export default function ForgettedScreen() {
                             />
                         </View>
                         <CustomButton title='Recuperar contraseña' onPress={handleSendEmail} disabled={loading} />
-                        {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+                        {loading && <ActivityIndicator color="#0000ff" style={{ marginTop: 20 }} />}
                     </>
                 );
             case 2:
@@ -133,7 +133,7 @@ export default function ForgettedScreen() {
                             />
                         </View>
                         <CustomButton title='Verificar código' onPress={handleVerifyCode} disabled={loading} />
-                        {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+                        {loading && <ActivityIndicator color="#0000ff" style={{ marginTop: 20 }} />}
                     </>
                 );
             case 3:
@@ -153,7 +153,7 @@ export default function ForgettedScreen() {
                             />
                         </View>
                         <CustomButton title='Actualizar contraseña' onPress={handleUpdatePassword} disabled={loading} />
-                        {loading && <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 20 }} />}
+                        {loading && <ActivityIndicator  color="#0000ff" style={{ marginTop: 20 }} />}
                     </>
                 );
         }

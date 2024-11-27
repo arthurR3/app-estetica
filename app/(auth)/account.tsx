@@ -219,7 +219,7 @@ export default function Account() {
             />
 
         {isloading ? (
-          <ActivityIndicator size="large" color="#452e3f" style={styles.loading} />
+          <ActivityIndicator  color="#452e3f" style={styles.loading} />
         ) : (
           <CustomButton title='Registrarme' onPress={handleSubmit} disabled={isloading} />
         )}

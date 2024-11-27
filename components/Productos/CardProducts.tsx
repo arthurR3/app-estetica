@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons'
-import { Icon } from '@react-native-material/core'
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, Text, View, Pressable, StyleProp, ViewStyle, ImageStyle, TextStyle, Alert } from 'react-native'
@@ -36,7 +35,7 @@ const CardProducts: React.FC<CardComponentProps> = (props) => {
                 <Text style={props.customStyles.priceStyle}>
                   ${(props.price).toFixed(2)}
                 </Text>
-                <Pressable style={[props.customStyles.priceStyle, {alignItems:'center'}]} onPress={() => {Alert.alert('Hola')}}>
+                <Pressable style={{alignItems:'center'}} onPress={() => {Alert.alert('Hola')}}>
                   <Ionicons name='cart-outline' size={24} />
                 </Pressable>
               </View>

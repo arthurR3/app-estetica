@@ -2,7 +2,7 @@ import { UserData } from '@/interfaces/auth.interfaces';
 import axios from 'axios';
 
 class AuthService {
-  private static baseUrl = `https://001d-201-97-107-140.ngrok-free.app/api/v1/users`;
+  private static baseUrl = `https://back-estetica-production-e475.up.railway.app/api/v1/users`;
 
   public static async login(email: string, password: string): Promise<any> {
     try {

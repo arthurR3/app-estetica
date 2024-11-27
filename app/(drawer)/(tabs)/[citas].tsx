@@ -168,7 +168,7 @@ export default function CitasScreen() {
         </View>
         {selectDate && (
 
-          <InputLogin placeholder='' image='time'>
+          <InputLogin placeholder='Selecciona una hora' image='time'>
             <Picker selectedValue={selectedTime}
               onValueChange={(value) => { setSelectedTime(value) }}
             >
@@ -180,7 +180,7 @@ export default function CitasScreen() {
           </InputLogin>
         )}
         {loading ? (
-          <ActivityIndicator size='large' color='#452e3f' style={styles.loading} />
+          <ActivityIndicator  color='#452e3f' style={styles.loading} />
         ) : (
           <CustomButton title='Agendar' onPress={handleSubmit} disabled={loading} />
         )}
