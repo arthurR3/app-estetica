@@ -1,5 +1,4 @@
 import React from 'react'
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer'
 import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from '@react-navigation/drawer';
 import { Feather } from '@expo/vector-icons';

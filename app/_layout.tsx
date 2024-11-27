@@ -6,7 +6,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import NavBar from './navbar/nav';
 import 'react-native-reanimated';
 import { UsuarioProvider } from '@/components/context/userContext';
-import { CartProvider } from '@/components/context/carritoContext';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -30,7 +29,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DarkTheme}>
       <UsuarioProvider>
-        <CartProvider>
+       {/* <CartProvider> */}
       <Stack>
         <Stack.Screen name='(drawer)' options={{header: ()=> <NavBar showMenu={true}/>}}/>
         <Stack.Screen name='users/perfil' options={{header: ()=> <NavBar showMenu={true}/>}}/>
@@ -40,7 +39,7 @@ export default function RootLayout() {
 
         <Stack.Screen name='(auth)' options={{headerShown:false}}/>
       </Stack>
-      </CartProvider>
+      {/* </CartProvider> */}
       </UsuarioProvider>
     </ThemeProvider>
   );

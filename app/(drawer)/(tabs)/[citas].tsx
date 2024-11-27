@@ -168,7 +168,7 @@ export default function CitasScreen() {
         </View>
         {selectDate && (
 
-          <InputLogin placeholder='' image='time'>
+          <InputLogin placeholder='Selecciona una hora' image='time'>
             <Picker selectedValue={selectedTime}
               onValueChange={(value) => { setSelectedTime(value) }}
             >

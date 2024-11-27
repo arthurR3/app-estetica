@@ -2,8 +2,6 @@ import InputLogin from '@/components/InputText'
 import CardProducts from '@/components/Productos/CardProducts'
 import { Productos } from '@/interfaces/products.interface'
 import ProductService from '@/services/productos.services'
-import { Ionicons } from '@expo/vector-icons'
-import { Picker } from '@react-native-picker/picker'
 import React, { useEffect, useState } from 'react'
 import { FlatList, SafeAreaView, StyleSheet, Text, View, Modal, TouchableOpacity, Button, Pressable } from 'react-native'
 

@@ -34,7 +34,7 @@ export default function DetailsScreen() {
   return (
     <ScrollView style={styles.container}>
       <View>
-        {detailService ? (npm
+        {detailService ?(
           <>
             <View style={styles.containerImage}>
               <Image source={{ uri: detailService.image }} style={styles.image} />

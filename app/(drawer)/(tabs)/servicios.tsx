@@ -1,9 +1,8 @@
 import CardServicios from '@/components/Servicios/CardServicios'
 import { Servicios } from '@/interfaces/services.interfaces'
 import ServiciosService from '@/services/servicios.services'
-import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 
 export default function ServiciosScreen() {
   const [servicios, setServicios] = useState<Servicios[]>([])

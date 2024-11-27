@@ -1,5 +1,4 @@
 import { Ionicons } from '@expo/vector-icons'
-import { Icon } from '@react-native-material/core'
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, Text, View, Pressable, StyleProp, ViewStyle, ImageStyle, TextStyle, Alert } from 'react-native'
