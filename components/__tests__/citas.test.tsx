@@ -39,8 +39,8 @@ describe('CitasScreen', () => {
     render(<CitasScreen />);
 
     expect(screen.getByText('Reserva una cita ahora mismo!'));
-    expect(screen.getByPlaceholderText('Selecciona un servicio'))
-    expect(screen.getByPlaceholderText('Selecciona una hora'))
+    expect(screen.getByText('Selecciona un servicio'))
+    expect(screen.getByText('Selecciona una hora'))
     expect(screen.getByText('Agendar'));
   });
 
@@ -55,6 +55,6 @@ describe('CitasScreen', () => {
 
     render(<CitasScreen />);
 
-    expect(screen.getByText('Ups! Parece que no has iniciado sesión'))
+    expect(screen.getByText('¡Ups! Parece que no has iniciado sesión'))
   });
 });
