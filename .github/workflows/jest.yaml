@@ -116,11 +116,6 @@ jobs:
       - name: Install Expo CLI
         run: npm install -g eas-cli
 
-      - name: Login to Expo
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}  # Token guardado como secreto
-        run: eas login --token ${{ secrets.EXPO_TOKEN }}
-
       - name: Build for Android
         run: eas build --platform android --non-interactive --profile preview --output ${{ github.workspace }}/app-release.apk
 
