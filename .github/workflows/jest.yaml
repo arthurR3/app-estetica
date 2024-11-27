@@ -1,4 +1,4 @@
-name: Run Jest Tests and Build APK
+name: Run Tests
 
 on:
   push:
