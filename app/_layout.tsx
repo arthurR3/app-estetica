@@ -32,7 +32,9 @@ export default function RootLayout() {
       <UsuarioProvider>
       <Stack>
         <Stack.Screen name='(drawer)' options={{header: ()=> <NavBar showMenu={true}/>}}/>
-        <Stack.Screen name='details/[service_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
+        <Stack.Screen name='details/services/[service_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
+        <Stack.Screen name='details/products/[products_detail]' options={{header:()=><NavBar showMenu={false}/>}}/>
+
         <Stack.Screen name='(auth)' options={{headerShown:false}}/>
       </Stack>
       </UsuarioProvider>

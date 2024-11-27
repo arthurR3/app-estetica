@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import React from 'react';
-import { View, Text, Image, Pressable, StyleProp, ViewStyle, TextStyle, ImageStyle } from 'react-native';
+import { View, Text, Image, Pressable, StyleProp, ViewStyle, TextStyle, ImageStyle, Alert } from 'react-native';
 
 interface CardServiciosProps {
   id: number;
@@ -22,11 +22,8 @@ interface CardServiciosProps {
 
 const CardServicios: React.FC<CardServiciosProps> = (props) => {
   return (
-    <Link href={`/details/${props.id}`} asChild>
-      <Pressable style={({ pressed }) => [
-        pressed ? { backgroundColor: 'lightgray', opacity: 0.8 } : null,
-      ]}
-      >
+    <Link href={`/details/services/${props.id}`} asChild>
+      <Pressable>
         <View style={props.customStyles.containerStyle} key={props.id}>
           <View style={props.customStyles.cardStyle}>
             <Image source={{ uri: props.imageUrl }} style={props.customStyles.imageStyle} />
@@ -37,7 +34,7 @@ const CardServicios: React.FC<CardServiciosProps> = (props) => {
             </View>
           </View>
         </View>
-      </Pressable>
+        </Pressable>
     </Link>
   );
 };

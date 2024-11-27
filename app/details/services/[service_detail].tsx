@@ -55,7 +55,7 @@ export default function DetailsScreen() {
               <Text style={styles.detailText}>Velazquez Ibarra, Col. Centro, Huejutla de Reyes, Hidalgo</Text>
             </View>
             <View style={styles.containerButton}>
-              <CustomButton title="Agendar Cita" onPress={() => { router.push('/citas') }} disabled={false} />
+            <CustomButton title="Agendar Cita" onPress={() => { router.push(`/${detailService.id}`) }} disabled={false} />
             </View>
           </>
         ) : (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Modal, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import InputLogin from "./InputText";
 
@@ -36,7 +36,11 @@ const CustomDatePicker = ({ onDateChange, minimumDate, filterDate}: DatePickerPr
               }
           } else {
               // Manejar caso cuando la fecha seleccionada no es laboral
-              console.log("La fecha seleccionada no es un día laboral.");
+              Alert.alert(
+                "Fecha no disponible",
+                "Este día no es laborable en la estética. Por favor, elige otro día.",
+                [{ text: "OK", onPress: () => toggleDatePicker() }]
+            );
           }
       } else {
           toggleDatePicker();
@@ -84,7 +88,8 @@ const CustomDatePicker = ({ onDateChange, minimumDate, filterDate}: DatePickerPr
                                 minimumDate={minimumDate}
                             />
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                        {Platform.OS === 'ios' && (
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                             <Pressable style={[styles.button, { backgroundColor: 'white' }]} onPress={toggleDatePicker}>
                                 <Text style={{ fontSize: 24, color: 'black' }}>Cancel</Text>
                             </Pressable>
@@ -92,6 +97,7 @@ const CustomDatePicker = ({ onDateChange, minimumDate, filterDate}: DatePickerPr
                                 <Text style={{ fontSize: 24, color: 'white', fontWeight: '500' }}>Seleccionar</Text>
                             </Pressable>
                         </View>
+                        )}
                     </View>
                 </Modal>
             )}

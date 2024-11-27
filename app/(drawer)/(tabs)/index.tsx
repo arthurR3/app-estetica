@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleContainer: {
-    fontFamily: 'San Francisco',
     textAlign: 'center',
     fontSize: 28,
     color: 'white',
