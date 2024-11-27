@@ -121,7 +121,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: npm install
-        - name: Run Expo EAS Build
+      - name: Run Expo EAS Build
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
         run: |
