@@ -1,4 +1,4 @@
-name: Run Jest Tests
+name: Run Tests
 
 on:
   push:
@@ -99,50 +99,36 @@ jobs:
 
       - name: Run CitasScreen Tests
         run: npm test -- --testPathPattern='citas.test.tsx'
+
   deploy-expo:
     runs-on: ubuntu-latest
+    needs: [test-servicios, test-home, test-citas]
+    if: github.ref == 'refs/heads/main'  # Solo ejecuta en la rama main
     steps:
-      - name: Setup repo
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4.2.1
 
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 20.x
-          cache: "npm"
+          node-version: '18.14.0'
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          distribution: "temurin"
+      - name: Install Expo CLI
+        run: npm install -g eas-cli
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Login to Expo
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}  # Token guardado como secreto
+        run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
-      - name: Setup Expo
-        uses: expo/expo-github-action@v8
-        with:
-          expo-version: latest
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Build for Android
+        run: eas build --platform android --non-interactive --profile preview --output ${{ github.workspace }}/app-release.apk
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      #- name: Build for iOS
+      #  run: eas build --platform ios --non-interactive --profile preview --output ${{ github.workspace }}/app-release.ipa
 
-      - name: Build Android app
-        run: eas build --platform android --profile preview --local --output ${{ github.workspace }}/app-release.apk
       - name: Upload APK artifact
         uses: actions/upload-artifact@v2
         with:
           name: app-release
           path: ${{ github.workspace }}/app-release.apk
-
-      #- name: Build for iOS
-      #  run: eas build --platform ios --non-interactive
-
-      #- name: Upload to Stores (Optional)
-      #  if: always() # Deshabilitar si no necesitas publicar directamente en las tiendas
-      #  run: |
-      #    eas submit --platform android --non-interactive --latest
-      #    eas submit --platform ios --non-interactive --latest
