@@ -124,6 +124,7 @@ jobs:
 
       - name: 🚀 Build app
         run:  eas build --platform android --non-interactive --profile production
+      
       #- name: Install Expo CLI
        # run: npm install -g eas-cli
 
