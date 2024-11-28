@@ -146,8 +146,8 @@ jobs:
       - name: Install Butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/latest/archive/default
-          unzip butler.zip -d ~/butler
-          sudo mv ~/butler/butler /usr/local/bin/
+          unzip butler.zip -d butler
+          sudo mv butler/butler /usr/local/bin/
 
       # 9. Subir el archivo a Itch.io
       - name: Deploy to Itch.io
