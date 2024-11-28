@@ -145,23 +145,19 @@ jobs:
       # 8. Instalar Butler
       - name: Install Butler
         run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/latest/archive/default
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip -d butler
-          sudo mv butler/butler /usr/local/bin/
-
-      # 9. Subir el archivo a Itch.io
-      - name: Deploy to Itch.io
+          sudo mv butler/butler /usr/local/bin
+          butler --version
+      - name: Deploy to itch.io
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.ITCH_API_KEY }}
+          BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}  
         run: |
-          butler push app-release.aab devJoshep/AppEstetica:android
-
-          #- name: Install Expo CLI
-          # run: npm install -g eas-cli
-
-          #- name: Build for Android
-          #  run: eas build --platform --non-interactive --no-wait --profile production
-
-          #- name: Build for iOS
-          #  run: eas build --platform ios --non-interactive --profile preview --output ${{ github.workspace }}/app-release.ipa
-
+          # Cambia 'dist/' por el directorio donde se genera tu build
+          if [ -d "dist" ]; then
+            echo "Carpeta dist encontrada. Realizando el despliegue..."
+            butler push dist/ 05JesusMoreno/opticenter-mobile:platform
+          else
+            echo "Carpeta dist no encontrada. Deteniendo despliegue."
+            exit 1
+          fi
