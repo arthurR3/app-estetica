@@ -149,15 +149,15 @@ jobs:
           unzip butler.zip -d butler
           sudo mv butler/butler /usr/local/bin
           butler --version
+      # 9. Desplegar a itch.io
       - name: Deploy to itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}  
         run: |
-          # Cambia 'dist/' por el directorio donde se genera tu build
-          if [ -d "dist" ]; then
-            echo "Carpeta dist encontrada. Realizando el despliegue..."
-            butler push  devjoshep/app-estetica:android
+          if [ -f "app-release.aab" ]; then
+            echo "Archivo de build encontrado. Realizando el despliegue..."
+            butler push app-release.aab devjoshep/app-estetica:android
           else
-            echo "Carpeta dist no encontrada. Deteniendo despliegue."
+            echo "Archivo de build no encontrado. Deteniendo despliegue."
             exit 1
           fi
